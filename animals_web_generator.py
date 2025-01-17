@@ -132,7 +132,9 @@ def generate_animal_informations(response):
 
   return output
 
-
+# problem: die erste suche funktioniert. Bei der zweiten suche ist aber der Platzhalter nicht mehr da.
+# bei zweiter suche muss der bestehende text mit dem neuen ausgetauscht werden,
+# alles zwischen den beiden <ul> elementen muss ausgetauscht werden
 def update_HTML_data(old_data="__REPLACE_ANIMALS_INFO__"):
   html = get_HTML_data()
   new_html_data = generate_new_HTML_code()
