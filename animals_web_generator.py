@@ -1,10 +1,8 @@
 import requests
+import CRD_data
 HTML_DATAPATH = "animals_template.html"
 API_KEY = {"X-Api-Key": "rPicwarm61jK9uOZ+wNI3A==3bUhKh0YiLMZm4ag"}
-
-"""
-  - wenn ein name eingebuat wird, der nicht existert, soll eine "fehlermeldung" auf der website geprintet werden
-"""
+#Backup Platzhalter zum kopieren für python code: "__REPLACE_ANIMALS_INFO__"
 
 def create_request():
   """creates the API request, on base of the user input"""
@@ -73,7 +71,7 @@ def validade_response(response, animal):
   else:
     output = (f"<li class='cards__item'>\n"
               f"<div class='card__title'>{animal}</div>\n"
-              f"<pclass='card__text'>the animal {animal} does not exist</p>\n"
+              f"<p class='card__text'>the animal {animal} does not exist</p>\n"
               f"</li>\n")
 
   return output
@@ -132,10 +130,14 @@ def generate_animal_informations(response):
 
   return output
 
-# problem: die erste suche funktioniert. Bei der zweiten suche ist aber der Platzhalter nicht mehr da.
-# bei zweiter suche muss der bestehende text mit dem neuen ausgetauscht werden,
-# alles zwischen den beiden <ul> elementen muss ausgetauscht werden
+
 def update_HTML_data(old_data="__REPLACE_ANIMALS_INFO__"):
+  """
+  updates HTML data. Gets the placeholder from a .txt file.
+  replaces the placeholder with the new HTML data and saves the new HMTL data as the new placeholder
+  """
+  old_data = CRD_data.get_data()
+
   html = get_HTML_data()
   new_html_data = generate_new_HTML_code()
 
@@ -143,6 +145,7 @@ def update_HTML_data(old_data="__REPLACE_ANIMALS_INFO__"):
 
   save_HTML_data(html)
 
+  CRD_data.save_data(new_html_data)
 
 def main():
   update_HTML_data()
