@@ -1,5 +1,5 @@
 
-DATAPATH = "./old_animal_data.txt"
+DATAPATH = "./programm_files/old_animal_data.txt"
 
 def get_data():
   with open(DATAPATH, "r") as objfile:

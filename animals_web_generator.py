@@ -1,6 +1,7 @@
 import requests
-import CRD_data
-HTML_DATAPATH = "animals_template.html"
+from porgramm_modules import CRD_data
+
+HTML_DATAPATH = "./programm_files/animals_template.html"
 API_KEY = {"X-Api-Key": "rPicwarm61jK9uOZ+wNI3A==3bUhKh0YiLMZm4ag"}
 #Backup Platzhalter zum kopieren für python code: "__REPLACE_ANIMALS_INFO__"
 
