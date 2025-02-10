@@ -44,7 +44,7 @@ def save_HTML_data(data):
   try:
     with open(HTML_DATAPATH, "w") as objfile:
       objfile.write(data)
-    print("Website was successfully generated to the file animals.html.")
+    print("Website was successfully generated to the file animals_template.html.")
   except FileNotFoundError as e:
     print(e)
 
@@ -83,18 +83,22 @@ def get_animal_informations(response):
 
   all_animal_informations = []
   for animal in data:
-    name = animal["name"]
-    diet = animal["characteristics"]["diet"]
-    location = animal["locations"][0]
+    name = animal.get("name", "Unbekannt")  # Falls "name" nicht existiert, wird "Unbekannt" verwendet
+    characteristics = animal.get("characteristics", {})
+    diet = characteristics.get("diet", "Keine Info")
 
-    try:
-      animal_type = animal["characteristics"]["type"]
-      animal_informations = [name, diet, location, animal_type]
-      all_animal_informations.append(animal_informations)
+    locations = animal.get("locations", [])
+    location = locations[0] if locations else "Ort unbekannt"  # Falls keine Locations vorhanden sind
 
-    except KeyError:
-      animal_informations = [name, diet, location]
-      all_animal_informations.append(animal_informations)
+    animal_type = characteristics.get("type", None)  # Falls "type" nicht existiert, None zurückgeben
+
+    animal_informations = [name, diet, location]
+
+    # if animal_type is None
+    if animal_type:
+      animal_informations.append(animal_type)
+
+    all_animal_informations.append(animal_informations)
   return all_animal_informations
 
 
